@@ -1,4 +1,4 @@
-function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledge)
+function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledge, transp, dot_size)
 %% inputs:
 % V_all = time x nodes matrix
 % f/tbus = from and to bus lists
@@ -43,19 +43,16 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
     rd = diag(R);
     elec_dist = sqrt(xd.^2 + rd.^2);
     elec_dist = [0; elec_dist];     % add a zero for the head node
-
-    disp(size(elec_dist))
-    disp(size(V_all))
     
     % make figure
     figure;
     hold on;
     for i = 1:iters
-        scatter(elec_dist,V_all(i,:)', ...
+        scatter(elec_dist,V_all(i,:)',dot_size, ...
             'filled', ...
             'MarkerFaceColor',colors{colorvec(i)}, ...
-            'MarkerFaceAlpha', 0.2, ...
-            'MarkerEdgeAlpha', 0.2, ...
+            'MarkerFaceAlpha', transp, ...
+            'MarkerEdgeAlpha', transp, ...
             'HandleVisibility', 'off')
     end
     xlabel('Impedance to Head $\sqrt{r^2 + x^2}$','FontSize',14,'Interpreter','latex')
@@ -69,6 +66,8 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
             'MarkerFaceColor', colors{i}, ...
             'DisplayName', ledge{i});
     end
-    legend('Location','southeast','Interpreter','latex','FontSize',12)
+    legend('Location','southeast','Interpreter','latex','FontSize',14)
+    ax = gca;
+    ax.TickLabelInterpreter = 'latex';
     hold off;
 end

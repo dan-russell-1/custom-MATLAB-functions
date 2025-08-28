@@ -26,5 +26,11 @@ function J = MP_jacob(xbase,mpc)
         xbaseM = xbase - prtrb;             % minus perturb
         % calculate solution
         J(:,i) = (MPfn(xbaseP,mpc) - MPfn(xbaseM,mpc))/2/delta;
+        % status update (overwrite previous line)
+        if ismember(i, round([0.25, 0.5, 0.75]*n))
+            fprintf('\r%d%% complete', round(100*i/n));
+        end
     end
+    % final status update
+    fprintf('\r100%% complete\n');
 end
