@@ -1,6 +1,6 @@
 function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledge, transp, dot_size)
 %% inputs:
-% V_all = time x nodes matrix
+% V_all = time x nodes matrix (all nodes, INCLUDING ss)
 % f/tbus = from and to bus lists
 % r/xvec = vectors of r and x values
 % colorvec = vec of 1,2,3... for colors
