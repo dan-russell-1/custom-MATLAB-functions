@@ -32,4 +32,6 @@ function [X, R] = mpc_XR(mpc)
     end
     X = X + tril(X,-1)';            % mirror values to upper tri
     R = R + tril(R,-1)';            % mirror values to upper tri
+    disp('Warning!!! This function can spit out incorrect X,R values depending on the ordering of the from and to bus!!!')
+    disp('Use mpc_RX_incidence instead. Its also WAY faster. Youre welcome')
 end
