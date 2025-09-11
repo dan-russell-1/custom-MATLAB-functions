@@ -12,8 +12,21 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
     nodes = size(V_all, 2);
     edges = size(fbus,1);
 
+% % following procedure from Kekatos LDF slides     % use this because it's faster and actually correct, buuuuut.... 
+%     % init incidence matrix
+%     incdnc = zeros(edges,nodes);
+%     % form incidence matrix
+%     for ii = 1:edges
+%         incdnc(ii, fbus(ii)) = 1;
+%         incdnc(ii, tbus(ii)) = -1;
+%     end
+%     % use matrix multiplication to get R and X
+%     A = incdnc(:,2:end);
+%     R = (A \ diag(Rvec)) / A';
+%     X = (A \ diag(Xvec)) / A';
 
-    % create digraph object for path finding
+
+    % create digraph object for path finding            % need this for now until I find a way to do depth
     G = digraph(fbus,tbus);   % create digraph object
 
     % get shortest paths
@@ -56,7 +69,7 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
             'HandleVisibility', 'off')
     end
     xlabel('Impedance to Head $\sqrt{r^2 + x^2}$','FontSize',14,'Interpreter','latex')
-    ylabel('Voltage p.u.','FontSize',14,'Interpreter','latex')
+    ylabel('Voltage (p.u.)','FontSize',14,'Interpreter','latex')
     yline(1.05,'k:','LineWidth',2, 'HandleVisibility', 'off')
     yline(.95,'k:','LineWidth',2,'DisplayName','Limits')
     grid on;
