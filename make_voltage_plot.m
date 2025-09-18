@@ -73,8 +73,8 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
             'HandleVisibility', 'off')
     end
     % xlabel('Impedance to Head $\sqrt{r^2 + x^2}$','FontSize',14,'Interpreter','latex')
-    xlabel('Node Depth','FontSize',14,'Interpreter','latex')
-    ylabel('Voltage (p.u.)','FontSize',14,'Interpreter','latex')
+    xlabel('Node Depth','FontSize',16,'Interpreter','latex')
+    ylabel('Voltage (p.u.)','FontSize',16,'Interpreter','latex')
     yline(1.05,'k:','LineWidth',2, 'HandleVisibility', 'off')
     yline(.95,'k:','LineWidth',2,'DisplayName','Limits')
     grid on;
@@ -84,8 +84,9 @@ function make_voltage_plot(V_all, fbus, tbus, Rvec, Xvec, colorvec, colors, ledg
             'MarkerFaceColor', colors{i}, ...
             'DisplayName', ledge{i});
     end
-    legend('Location','southeast','Interpreter','latex','FontSize',14)
+    legend('Location','southeast','Interpreter','latex','FontSize',16)
     ax = gca;
+    ax.FontSize = 14;
     ax.TickLabelInterpreter = 'latex';
     hold off;
 end
